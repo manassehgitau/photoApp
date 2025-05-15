@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Photo Details{% endblock %}
+
+{% block content %}
+<div class="bg-white shadow rounded-lg p-6">
+    <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="w-full h-64 object-cover rounded">
+    <h1 class="text-2xl font-bold mt-4">{{ photo.title }}</h1>
+    <p class="text-gray-700 mt-2">{{ photo.description }}</p>
+    <div class="mt-4">
+        <h3 class="text-lg font-medium">Tags:</h3>
+        <div class="mt-2">
+            {% for tag in photo.tags.all %}
+                <span class="text-xs bg-gray-200 text-gray-800 px-2 py-1 rounded">{{ tag.name }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="mt-6">
+        <form method="post" action="{% url 'like_photo' photo.id %}">
+            {% csrf_token %}
+            {% if user in photo.liked_by.all %}
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Unlike</button>
+            {% else %}
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Like</button>
+            {% endif %}
+        </form>
+        <p class="mt-2 text-sm text-gray-600">{{ photo.liked_by.count }} likes</p>
+    </div>
+</div>
+{% endblock %}
