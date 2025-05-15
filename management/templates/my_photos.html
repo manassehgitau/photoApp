@@ -1,23 +1,8 @@
 {% extends 'base.html' %}
-{% block title %}Home{% endblock %}
+{% block title %}My Photos{% endblock %}
 
 {% block content %}
-<div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold">Photo Gallery</h1>
-    <div>
-        <form method="get" class="inline-block">
-            <select name="tag" class="border rounded px-2 py-1">
-                <option value="">All Tags</option>
-                {% for tag in tags %}
-                    <option value="{{ tag.name }}" {% if request.GET.tag == tag.name %}selected{% endif %}>
-                        {{ tag.name }}
-                    </option>
-                {% endfor %}
-            </select>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Filter</button>
-        </form>
-    </div>
-</div>
+<h1 class="text-2xl font-bold mb-6">My Uploaded Photos</h1>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {% for photo in photos %}

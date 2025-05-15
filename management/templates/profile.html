@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="bg-white shadow rounded-lg p-6">
+    <div class="flex items-center space-x-4">
+        <img src="{{ profile.profile_photo.url }}" alt="Profile Photo" class="w-24 h-24 rounded-full object-cover">
+        <div>
+            <h2 class="text-xl font-semibold">{{ profile.user.username }}</h2>
+            <p class="text-gray-600">{{ profile.user.email }}</p>
+        </div>
+    </div>
+    <div class="mt-6">
+        <h3 class="text-lg font-medium">About</h3>
+        <p class="text-gray-700 mt-2">Bio: {{ profile.bio }}</p>
+        <p class="text-gray-700 mt-1">Location: {{ profile.location }}</p>
+        <p class="text-gray-700 mt-1">Contact: {{ profile.contact }}</p>
+    </div>
+    <div class="mt-6 flex space-x-4">
+        <a href="{% url 'profile_update' %}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Edit Profile</a>
+        <a href="{% url 'change_password' %}" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Change Password</a>
+    </div>
+</div>
+{% endblock %}
